@@ -18,7 +18,7 @@ module.exports.signup=async(req,res)=>
     {
       return next(err);
     }
-    req.flash("sucess","Registered Sucessfuly");
+    req.flash("success","Registered Successfuly");
     res.redirect("/listings");
   })
   }
@@ -35,7 +35,7 @@ module.exports.loginpage = (req,res)=>{
 
 module.exports.login=async(req,res)=>  
 {
-    req.flash("sucess","Sucessfuly logged in ");
+    req.flash("success","Successfuly logged in ");
     let reurl = res.locals.saveUrl||"/listings";
     res.redirect(reurl);
 }
@@ -46,6 +46,6 @@ module.exports.logout=(req,res,next)=>{
          return next(err);
       }
     })
-    req.flash("sucess","logged you out");
+    req.flash("success","logged you out");
     res.redirect("/listings");
 }

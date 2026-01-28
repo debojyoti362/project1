@@ -1,8 +1,8 @@
-<% if(sucess && sucess.length) {%>
+<% if(typeof success !== "undefined" && success.length) {%>
 <div class="row">
   <div class="col-6 offset-3">
     <div class="alert alert-success" role="alert">
-    <%= sucess%>
+    <%= success%>
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   </div>

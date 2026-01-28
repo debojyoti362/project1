@@ -64,7 +64,7 @@ const sessionoption =
 
 //FOR FLASH AND CUREENT USER
  app.use((req,res,next)=>{
-   res.locals.sucess = req.flash("sucess");
+   res.locals.success = req.flash("success");
    res.locals.error =req.flash("error");
    res.locals.currentuser = req.user || null;
    next();

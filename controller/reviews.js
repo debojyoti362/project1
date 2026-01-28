@@ -12,7 +12,7 @@ module.exports.createreview = async(req,res)=>
   listing.reviews.push(react);
   await react.save();
   await listing.save();
-  req.flash("sucess","Review uploaded");
+  req.flash("success","Review uploaded");
   res.redirect(`/listings/${id}`);
 }
 module.exports.destroyreview=async(req,res)=>
@@ -23,6 +23,6 @@ module.exports.destroyreview=async(req,res)=>
   let dellist = await Listing.findById(id);
   console.log(delreview);
   console.log(dellist);
-  req.flash("sucess","Sucessfully Deleted");
+  req.flash("success","Successfully Deleted");
   res.redirect(`/listings/${id}`);
 }
