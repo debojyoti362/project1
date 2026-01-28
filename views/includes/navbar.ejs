@@ -16,11 +16,10 @@
       </div>
       <div class="navbar-nav ms-auto">
          <a class="nav-link" href="/listings/new">SPINX Buy/Sell/Ride</a>
-        <% if(!currentuser) {%>
+        <% if(typeof currentuser === "undefined" || currentuser === null) {%>
         <a class="nav-link "  href="/Signup"><b>Sign Up</b></a>
         <a class="nav-link" href="/login"><b>Login</b></a>
-        <% } %>
-        <% if(currentuser) {%>
+        <% } else {%>
         <a class="nav-link" href="/logout"><b>Log out</b></a>
          <% } %>
       </div>
