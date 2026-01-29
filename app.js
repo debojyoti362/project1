@@ -22,7 +22,10 @@ if(process.env.NODE_ENV != "production")
  const passport = require("passport");
  const LocalStrategy= require("passport-local");
  const User=require("./models/user.js");
-
+  if (!dburl) 
+    {
+  throw new Error("ATLASDB_URL is missing");
+    }
  //for mongo store
  const store = MongoStore.create({
   mongoUrl : dburl,
@@ -32,7 +35,7 @@ if(process.env.NODE_ENV != "production")
   },
   touchAfter: 24*3600,
  });
- store.on("error",()=>{
+ store.on("error",(err)=>{
   console.log("Error in mongo session ",err);
 })
 
@@ -40,7 +43,7 @@ if(process.env.NODE_ENV != "production")
 const sessionoption =
 {
   store,
-  secret:process.env.secret,
+  secret:process.env.SECRET,
   resave:false,
   saveUninitialized:true,
   cookie:
@@ -71,18 +74,7 @@ const sessionoption =
  })
 
 
-//DATABASE CONNECTION
-  main().then(()=>{
-    console.log("connected to database");  
-  })
-  .catch((err)=>
-  {
-    console.log(err);
-  });
- async function main()
- {
-    await mongoose.connect(dburl);
- }
+
 //PUBLIC PATH SETTING WITH MIDDLEWARE
  app.set("view engine","ejs");
  app.set("views",path.join(__dirname,"views"));
@@ -108,6 +100,18 @@ const sessionoption =
    let {status=500,message="something went wrong!"} = err;
    res.render("error.ejs",{message});
  });
+ //DATABASE CONNECTION
+  main().then(()=>{
+    console.log("connected to database");  
+  })
+  .catch((err)=>
+  {
+    console.log(err);
+  });
+ async function main()
+ {
+    await mongoose.connect(dburl);
+ }
  app.listen(port,()=>
  {
     console.log("Listening.......");
